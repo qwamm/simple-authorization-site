@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form for authorization</title>
+</head>
+<body>
+
+<form style = "text-align:center; margin-top: 220px;">
+    <label for="fname">Login:</label>
+    <input type="text" placeholder = "Enter text" id="login" name="login"><br><br>
+    <label for="lname">Password:</label>
+    <input type="text" placeholder = "Enter text" id="password" name="password"><br><br>
+    <input type="submit" id = "submit_bottom" value="Submit">
+</form>
+
+<script>
+    class Object {
+        constructor(login, password) {
+            this.login = login
+            this.password = password
+        }
+    }
+    var user_log = document.getElementById("login")
+    var user_pass = document.getElementById("password")
+    var submit_bottom = document.getElementById('submit_bottom')
+    submit_bottom.onclick = function () {
+        var obj = new Object(user_log.value, user_pass.value)
+        var json = JSON.stringify(obj);
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "POST", 'http://localhost:8000', false ); // false for synchronous request
+        xmlHttp.send( json );
+        if (!xmlHttp.responseText.localeCompare('Success'))
+        {
+            //add your own path here if it's necessary
+            window.location = "file:C://Users//anoni//WebstormProjects//auth_front//success.html"
+        }
+        console.log(xmlHttp.responseText);
+    }
+</script>
+
+</body>
+</html>
