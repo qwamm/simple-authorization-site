@@ -16,12 +16,27 @@ const server = http.createServer((req, res) => {
           }
       });
   }
+  else if(req.url === '/reg')
+  {
+      console.log(req.url)
+      res.statusCode = 200;
+      res.setHeader('Content-type', 'text/html');
+      var html = fs.readFileSync('reg.html');
+      res.write(html);
+      res.end(); //end the response
+      // res.setHeader('Content-Type', '')
+      // res.write('<h1>about us page<h1>'); //write a response
+      // res.end(); //end the response
+  }
+  else if(req.url === "/style.css"){
+      fs.readFile('style.css', function(err, data) {
+          res.writeHead(200, {'Content-Type': 'text/css'});
+          res.write(data);
+          res.end();
+      });
+  }
 })
 
 server.listen(port, hostname, () => {
     console.log(`Server listening at http://${hostname}:${port}/`);
 })
-
-function func() {
-    console.log("Function was called")
-}

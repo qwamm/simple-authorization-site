@@ -2,32 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Form for authorization</title>
+    <link rel = "stylesheet" href = "style.css">
+    <title>Registration form</title>
 </head>
 <body>
-
-<form style = "text-align:center; margin-top: 220px;">
+<h3 class = "reg">Registration</h3>
+<form class = "form">
     <label for="fname">Login:</label>
     <input type="text" placeholder = "Enter text" id="login" name="login"><br><br>
     <label for="lname">Password:</label>
     <input type="text" placeholder = "Enter text" id="password" name="password"><br><br>
-    <a href = "http://127.0.0.1:1841/reg">Sign up</a>>
-    <input type="submit" id = "submit_button" value="Submit">
+    <input type="submit" id = "register_button" value="Register">
 </form>
-
 <script>
     class Object {
         constructor(login, password, action) {
+            this.action = action
             this.login = login
             this.password = password
-            this.action = action
         }
     }
-    var user_action = 'a'
+    var user_action = 'r'
     var user_log = document.getElementById("login")
     var user_pass = document.getElementById("password")
-    var submit_bottom = document.getElementById('submit_button')
-    submit_bottom.onclick = function () {
+    var register_bottom = document.getElementById('register_button')
+    register_bottom.onclick = function () {
         var obj = new Object(user_log.value, user_pass.value, user_action)
         var json = JSON.stringify(obj);
         var xmlHttp = new XMLHttpRequest();
@@ -36,10 +35,10 @@
         if (!xmlHttp.responseText.localeCompare('Success')) {
             //add your own path here if it's necessary
             console.log(xmlHttp.responseText);
-            window.open("http://127.0.0.1:8080/auth_front/success.html")
+            window.location.replace("http://127.0.0.1:8080/auth_front/success.html")
+            window.location.reload()
         }
     }
 </script>
-
 </body>
 </html>
